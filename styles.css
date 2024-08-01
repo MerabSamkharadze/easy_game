@@ -58,7 +58,8 @@ h1 {
   display: block;
 }
 
-#tryCount {
+#tryCount,
+#bestScore {
   font-size: 1.2em;
   color: #0072ff;
 }

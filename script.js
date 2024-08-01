@@ -1,5 +1,6 @@
 const gameBoard = document.getElementById("gameBoard");
 const tryCount = document.getElementById("tryCount");
+const bestScore = document.getElementById("bestScore");
 
 const images = [
   "./images/image1.svg",
@@ -27,6 +28,7 @@ let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
 let tries = 0;
+let matchedPairs = 0;
 
 function createBoard() {
   cards.forEach((image) => {
@@ -60,6 +62,10 @@ function checkForMatch() {
 
   if (isMatch) {
     disableCards();
+    matchedPairs++;
+    if (matchedPairs === images.length) {
+      updateBestScore();
+    }
   } else {
     unflipCards();
   }
@@ -87,9 +93,25 @@ function incrementTries() {
   tryCount.textContent = tries;
 }
 
+function updateBestScore() {
+  const currentBestScore = localStorage.getItem("bestScore");
+  if (!currentBestScore || tries < currentBestScore) {
+    localStorage.setItem("bestScore", tries);
+    bestScore.textContent = tries;
+  }
+}
+
 function resetBoard() {
   [firstCard, secondCard] = [null, null];
   lockBoard = false;
 }
 
+function displayBestScore() {
+  const currentBestScore = localStorage.getItem("bestScore");
+  if (currentBestScore) {
+    bestScore.textContent = currentBestScore;
+  }
+}
+
 createBoard();
+displayBestScore();

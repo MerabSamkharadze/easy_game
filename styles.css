@@ -57,3 +57,8 @@ h1 {
 .card.flipped img {
   display: block;
 }
+
+#tryCount {
+  font-size: 1.2em;
+  color: #0072ff;
+}

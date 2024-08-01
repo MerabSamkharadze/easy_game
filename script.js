@@ -1,4 +1,5 @@
 const gameBoard = document.getElementById("gameBoard");
+const tryCount = document.getElementById("tryCount");
 
 const images = [
   "./images/image1.svg",
@@ -25,6 +26,7 @@ shuffle(cards);
 let firstCard = null;
 let secondCard = null;
 let lockBoard = false;
+let tries = 0;
 
 function createBoard() {
   cards.forEach((image) => {
@@ -61,6 +63,8 @@ function checkForMatch() {
   } else {
     unflipCards();
   }
+
+  incrementTries();
 }
 
 function disableCards() {
@@ -76,6 +80,11 @@ function unflipCards() {
     secondCard.classList.remove("flipped");
     resetBoard();
   }, 1000);
+}
+
+function incrementTries() {
+  tries++;
+  tryCount.textContent = tries;
 }
 
 function resetBoard() {
